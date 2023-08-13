@@ -1,0 +1,19 @@
+Задача:
+Открыть тестер шаблонизатора https://try.freemarker.apache.org/
+В цикле вывести даты дней с 1 числа месяца по сегодняшний день:
+1 01 2021
+2 01 2021
+…
+19 01 2021
+Правило:
+Не использовать функцию substring. 
+Текущая дата: 
+<#assign cDate = .now>
+${cDate}
+
+
+РЕШЕНИЕ:
+<#assign cDate = .now>
+<#list 0..(cDate?string["dd"]?number - 1) as day>
+${(cDate?long - day * 24*3600000)?number_to_datetime?date?iso("UTC")}
+</#list>
